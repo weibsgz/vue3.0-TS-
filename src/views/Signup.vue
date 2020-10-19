@@ -16,7 +16,8 @@
       </div>
       <div class="mb-3">
         <label class="form-label">重复密码</label>
-        <validate-input type="password" placeholder="请再次密码" :rules="repeatPasswordRules" v-model="formData.repeatPassword" />
+        <validate-input type="password" placeholder="请再次密码" :rules="repeatPasswordRules"
+          v-model="formData.repeatPassword" />
       </div>
       <template #submit>
         <button type="submit" class="btn btn-primary btn-block btn-large">注册新用户</button>
@@ -36,19 +37,19 @@ export default defineComponent({
   name: "Signup",
   components: {
     ValidateInput,
-    ValidateForm
+    ValidateForm,
   },
   setup() {
     const formData = reactive({
       email: "",
       nickName: "",
       password: "",
-      repeatPassword: ""
+      repeatPassword: "",
     });
     const router = useRouter();
     const emailRules = [
       { type: "required", message: "电子邮箱地址不能为空" },
-      { type: "email", message: "请输入正确的电子邮箱格式" }
+      { type: "email", message: "请输入正确的电子邮箱格式" },
     ];
     const nameRules = [{ type: "required", message: "昵称不能为空" }];
     const passwordRules = [{ type: "required", message: "密码不能为空" }];
@@ -59,25 +60,25 @@ export default defineComponent({
         validator: () => {
           return formData.password === formData.repeatPassword;
         },
-        message: "密码不相同"
-      }
+        message: "密码不相同",
+      },
     ];
     const onFormSubmit = (result: boolean) => {
       if (result) {
         const payload = {
           email: formData.email,
           password: formData.password,
-          nickName: formData.nickName
+          nickName: formData.nickName,
         };
         axios
           .post("/users/", payload)
-          .then(data => {
+          .then((data) => {
             alert("注册成功");
             setTimeout(() => {
               router.push("/login");
             }, 2000);
           })
-          .catch(e => {
+          .catch((e) => {
             console.log(e);
           });
       }
@@ -88,9 +89,9 @@ export default defineComponent({
       passwordRules,
       repeatPasswordRules,
       onFormSubmit,
-      formData
+      formData,
     };
-  }
+  },
 });
 </script>
 

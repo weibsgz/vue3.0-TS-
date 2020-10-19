@@ -14,8 +14,9 @@ axios.interceptors.request.use((config) => {
     config.headers.common.Authorization = `Bearer ${Token}`
   }
 
-  if (config.method === 'get') {
-    config.params = { ...config.params, icode: '325DEE90E25A32A4' }
+  config.params = { ...config.params, icode: '325DEE90E25A32A4' }
+  if (config.data instanceof FormData) {
+    config.data.append('icode', '325DEE90E25A32A4')
   } else {
     config.data = { ...config.data, icode: '325DEE90E25A32A4' }
   }

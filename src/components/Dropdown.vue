@@ -28,8 +28,10 @@ export default defineComponent({
     const dropDownRef = ref(null);
 
     const isClickOut = useClickOutside(dropDownRef);
+    console.log(isClickOut)
 
-    watch(isClickOut, () => {
+    watch(isClickOut, (newVal) => {
+      console.log('isClickOut', newVal)
       if (isClickOut.value && isOpen.value) {
         isOpen.value = false;
       }
